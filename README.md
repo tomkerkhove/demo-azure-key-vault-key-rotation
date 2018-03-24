@@ -1,4 +1,5 @@
-# In-Memory Caching with automatic Service Bus authentication key rolling
+# Azure Key Vault - In-Memory Caching with automatic Service Bus authentication key rolling
+
 [![Build Status](https://travis-ci.org/tomkerkhove/demo-azure-key-vault-key-rotation.svg?branch=master)](https://travis-ci.org/tomkerkhove/demo-azure-key-vault-key-rotation)
 
 Demo on how you can use in-memory caching to avoid hitting Azure Key Vault every time. It is also aware when an authentication key has been revoked and automatically gets the latest secret from Key Vault.
