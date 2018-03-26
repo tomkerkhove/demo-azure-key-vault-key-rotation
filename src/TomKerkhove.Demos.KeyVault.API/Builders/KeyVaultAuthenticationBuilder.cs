@@ -13,7 +13,7 @@ namespace TomKerkhove.Demos.KeyVault.API.Builders
 
         private readonly KeyVaultClient.AuthenticationCallback authenticationCallback;
 
-        private KeyVaultAutenticationBuilder(KeyVaultClient.AuthenticationCallback authenticationCallback)
+        private KeyVaultAuthenticationBuilder(KeyVaultClient.AuthenticationCallback authenticationCallback)
         {
             this.authenticationCallback = authenticationCallback;
         }
@@ -21,19 +21,19 @@ namespace TomKerkhove.Demos.KeyVault.API.Builders
         /// <summary>
         ///     Use basic authentication to authenticate with Azure AD
         /// </summary>
-        public static KeyVaultAutenticationBuilder UseBasicAuthentication()
+        public static KeyVaultAuthenticationBuilder UseBasicAuthentication()
         {
-            return new KeyVaultAutenticationBuilder(BasicAuthenticationCallback);
+            return new KeyVaultAuthenticationBuilder(BasicAuthenticationCallback);
         }
 
         /// <summary>
         ///     Use Managed Service Identity to delegate authentication with Azure AD to Azure
         /// </summary>
-        public static KeyVaultAutenticationBuilder UseManagedServiceIdentity()
+        public static KeyVaultAuthenticationBuilder UseManagedServiceIdentity()
         {
             var azureServiceTokenProvider = new AzureServiceTokenProvider();
             var authenticationCallback = new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback);
-            return new KeyVaultAutenticationBuilder(authenticationCallback);
+            return new KeyVaultAuthenticationBuilder(authenticationCallback);
         }
 
         /// <summary>
