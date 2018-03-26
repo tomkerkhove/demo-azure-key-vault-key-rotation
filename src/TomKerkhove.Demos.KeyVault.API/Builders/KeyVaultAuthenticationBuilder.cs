@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace TomKerkhove.Demos.KeyVault.API.Builders
 {
-    public class KeyVaultAutenticationBuilder
+    public class KeyVaultAuthenticationBuilder
     {
         private static readonly string adApplicationId = "666ef5f5-017d-4f01-b105-54fea4d9618f";
         private static readonly string adApplicationSecret = "oKQTcEHlIZ7WKAiXqKt0DSC+i1HMOOueQnoHtXORpPs=";

@@ -13,7 +13,7 @@ namespace TomKerkhove.Demos.KeyVault.API.Providers
 
         public SecretProvider()
         {
-            var keyVaultAutenticationBuilder = Startup.IsDevelopment ? KeyVaultAutenticationBuilder.UseBasicAuthentication() : KeyVaultAutenticationBuilder.UseManagedServiceIdentity();
+            var keyVaultAutenticationBuilder = Startup.IsDevelopment ? KeyVaultAuthenticationBuilder.UseBasicAuthentication() : KeyVaultAuthenticationBuilder.UseManagedServiceIdentity();
             keyVaultClient = keyVaultAutenticationBuilder.Build();
         }
 
