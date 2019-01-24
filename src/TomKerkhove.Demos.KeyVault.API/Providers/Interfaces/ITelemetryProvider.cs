@@ -7,5 +7,6 @@ namespace TomKerkhove.Demos.KeyVault.API.Providers.Interfaces
         void IncreaseGauge(string gaugeName);
         void LogException(Exception exception);
         void LogTrace(string traceMessage);
+        void LogEvent(string eventName);
     }
 }

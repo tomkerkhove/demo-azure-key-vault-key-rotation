@@ -40,6 +40,8 @@ namespace TomKerkhove.Demos.KeyVault.API.Controllers
 
                 await ProcessNewOrderAsync(rawOrder);
 
+                telemetryProvider.LogEvent("Order Created");
+
                 return Ok(order);
             }
             catch (KeyVaultErrorException keyVaultException)
@@ -77,7 +79,11 @@ namespace TomKerkhove.Demos.KeyVault.API.Controllers
             var connectionString = await secretProvider.GetSecretAsync(SecretName);
 
             var retryPolicy = Policy.Handle<UnauthorizedAccessException>()
-                .RetryAsync(retryCount: 5, onRetryAsync: async (exception, retryCount, context) => connectionString = await secretProvider.GetSecretAsync(SecretName, ignoreCache: true));
+                .RetryAsync(retryCount: 5, onRetryAsync: async (exception, retryCount, context) =>
+                {
+                    telemetryProvider.LogTrace($"Unauthorized to access Azure Service Bus. Reading latest key from Key Vault");
+                    connectionString = await secretProvider.GetSecretAsync(SecretName, ignoreCache: true);
+                });
 
             await retryPolicy.ExecuteAsync(async () => await QueueMessageAsync(rawOrder, connectionString));
         }

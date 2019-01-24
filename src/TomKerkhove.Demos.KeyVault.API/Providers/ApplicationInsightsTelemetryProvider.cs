@@ -31,5 +31,10 @@ namespace TomKerkhove.Demos.KeyVault.API.Providers
         {
             telemetryClient.TrackTrace(traceMessage);
         }
+
+        public void LogEvent(string eventName)
+        {
+            telemetryClient.TrackEvent(eventName);
+        }
     }
 }

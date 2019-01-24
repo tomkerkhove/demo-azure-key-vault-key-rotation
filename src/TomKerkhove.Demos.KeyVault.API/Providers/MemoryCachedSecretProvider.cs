@@ -33,7 +33,7 @@ namespace TomKerkhove.Demos.KeyVault.API.Providers
             if (ignoreCache == false && memoryCache.TryGetValue(secretName, out string secretValue))
             {
                 telemetryProvider.IncreaseGauge("Cache Hit");
-                telemetryProvider.LogTrace($"Secret '{secretName}' cached");
+                telemetryProvider.LogTrace($"Secret '{secretName}' was cached");
                 return secretValue;
             }
 
@@ -44,6 +44,7 @@ namespace TomKerkhove.Demos.KeyVault.API.Providers
             telemetryProvider.IncreaseGauge("Cache Miss");
             telemetryProvider.LogTrace($"Secret '{secretName}' was not cached");
             memoryCache.Set(secretName, secret, defaultCacheExpiryDuration);
+            telemetryProvider.LogTrace($"Secret '{secretName}' cached");
 
             return secret;
         }
